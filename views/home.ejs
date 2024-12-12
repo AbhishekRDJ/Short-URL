@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Short URL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: linear-gradient(to right, #3bb6df, #ffffff);
+            
+        }
+
+        .container {
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 8px rgba(0, 1, 0, 0.936);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #007bff;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .container p {
+            color: #555;
+            margin-top: 15px;
+            font-size: 1rem;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .input-group input {
+            width: 70%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 2px solid #ccc;
+            border-radius: 12px;
+
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #007bff;
+        }
+
+        .input-group button {
+            padding: 15px 25px;
+            
+            font-size: 1rem;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 12px;
+            margin-left: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .input-group button:hover {
+            background-color: #0056b3;
+        }
+
+        .generated-url {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 25px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .generated-url input {
+            border: none;
+            background: none;
+            width: 100%;
+            font-size: 1rem;
+            color: #007bff;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .generated-url button {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .generated-url button:hover {
+            background-color: #0056b3;
+        }
+
+        .action-buttons {
+            margin-top: 30px;
+
+        }
+
+        .action-buttons button {
+            margin: 10px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+        }
+
+        .action-buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        .footer-text {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        @media screen and (max-width: 600px) {
+            .input-group input {
+                width: 60%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>URL Shortener</h1>
+        <% if (locals.id && locals.totalclick>= 0) { %>
+            <div class="generated-url">
+                <input type="text" value="http://localhost:8001/url/<%= id %>" readonly>
+                <button onclick="copyToClipboard()">Copy URL</button>
+            </div>
+            <p>Long URL: <a href="<%= locals.longUrl %>" target="_blank">
+                    <%= locals.longUrl %>
+                </a></p>
+            <div class="action-buttons">
+                <button onclick="redirectToClickCount('<%= id %>')">Total clicks of your short URL</button>
+                <hr>
+                <div>Total Clicks: <%= totalclick %>
+                </div>
+                <hr>
+                <button onclick="window.location.href='/'">Shorten another URL</button>
+            </div>
+            <% } else if (locals.id) { %>
+                <div class="generated-url">
+                    <input type="text" value="http://localhost:8001/url/<%= id %>" readonly>
+                    <button onclick="copyToClipboard()">Copy URL</button>
+                </div>
+                <p>Long URL: <a href="<%= locals.longUrl %>" target="_blank">
+                        <%= locals.longUrl %>
+                    </a></p>
+                <div class="action-buttons">
+                    <button onclick="redirectToClickCount('<%= id %>')">Total clicks of your short URL</button>
+                    <hr>
+                    <button onclick="window.location.href='/'">Shorten another URL</button>
+                </div>
+                <% } else { %>
+                    <p>Paste the URL to be shortened</p>
+                    <form action="/url" method="POST">
+                        <div class="input-group">
+                            <input type="url" name="url" placeholder="Enter the link here" required>
+                            <button type="submit">Shorten URL</button>
+                        </div>
+                    </form>
+                    <% } %>
+                        <p class="footer-text">* Short URLs that do not have at least one click per month are disabled
+                        </p>
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            const urlInput = document.querySelector('.generated-url input');
+            urlInput.select();
+            urlInput.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            alert('URL copied to clipboard!');
+        }
+
+        function redirectToClickCount(shortId) {
+            window.location.href = '/url/count/' + shortId;
+        }
+    </script>
+</body>
+
+</html>
