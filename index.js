@@ -1,7 +1,7 @@
 const express = require("express")
 require('dotenv').config(); 
 const shorturl = require("./Routes/shorturl")
-const urlRoute = require("../URL Shortener/Routes/URL")
+const urlRoute = require("./Routes/URL")
 const { connectToMongo } = require("./Connection/connect")
 const path = require("path")
 const URL = require("./Models/URL")
