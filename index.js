@@ -10,7 +10,8 @@ const port = 8001;
 
 
 
-const mongoURI = "mongodb+srv://abhisheksangule6:3v35GLNLtpovw4DV@urlshortener.5uo5s.mongodb.net/short_url?retryWrites=true&w=majority&appName=URLShortener";
+// const mongoURI = "mongodb+srv://abhisheksangule6:3v35GLNLtpovw4DV@urlshortener.5uo5s.mongodb.net/short_url?retryWrites=true&w=majority&appName=URLShortener";
+const mongoURI = process.env.MONGO_URI;
 // console.log("Mongo URI:", process.env.MONGO_URI);
 
 if (!mongoURI) {
