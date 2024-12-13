@@ -34,7 +34,7 @@ async function handelGenerteNewShortURL(req, res) {
         return res.render("home", {
             id: shortID,
             redirectURL: req.body.url,
-            baseUrl: "http://localhost:8001"
+            baseUrl: "https://short-url-m9x0.onrender.com"
         })
         return res.status(201).json({ shortId: newUrl.shortId, redirectURL: newUrl.redirectURL });
     } catch (err) {
