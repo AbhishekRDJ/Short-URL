@@ -52,7 +52,7 @@ async function handleGetAnalytics(req, res) {
     }
 
     // Get the total click count (or visits history length)
-    const totalclick = result.visitedHistory.length;
+    const totalclick = result.visitedHistory.length-1;
 
     // Render the home page and pass totalclick to EJS
     return res.render("home", {
