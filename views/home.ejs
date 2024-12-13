@@ -173,9 +173,10 @@
                 <hr>
                 <button onclick="window.location.href='/'">Shorten another URL</button>
             </div>
-            <% } else if (locals.id) { %>
+            <% } else if (locals.id && locals.baseUrl) { %>
                 <div class="generated-url">
-                    <input type="text" value="http://localhost:8001/url/<%= id %>" readonly>
+                    
+                    <input type="text" value="<%= baseUrl %>/url/<%= id %>" readonly>
                     <button onclick="copyToClipboard()">Copy URL</button>
                 </div>
                 <p>Long URL: <a href="<%= locals.longUrl %>" target="_blank">

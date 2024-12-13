@@ -29,10 +29,12 @@ async function handelGenerteNewShortURL(req, res) {
             redirectURL: body.url,
             visitedHistory: []
         });
-
+        await newUrl.save();
         // Respond with the created short URL
         return res.render("home", {
             id: shortID,
+            redirectURL: req.body.url,
+            baseUrl: "http://localhost:8001"
         })
         return res.status(201).json({ shortId: newUrl.shortId, redirectURL: newUrl.redirectURL });
     } catch (err) {
@@ -54,7 +56,7 @@ async function handleGetAnalytics(req, res) {
 
     // Render the home page and pass totalclick to EJS
     return res.render("home", {
-        totalclick: totalclick, 
+        totalclick: totalclick,
         id: shortId // You may want to send the id too
     });
 
