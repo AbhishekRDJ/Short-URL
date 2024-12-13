@@ -159,7 +159,7 @@
         <h1>URL Shortener</h1>
         <% if (locals.id && locals.totalclick>= 0) { %>
             <div class="generated-url">
-                <input type="text" value="http://localhost:8001/url/<%= id %>" readonly>
+                <input type="text" value="https://short-url-m9x0.onrender.com/url/<%= id %>" readonly>
                 <button onclick="copyToClipboard()">Copy URL</button>
             </div>
             <p>Long URL: <a href="<%= locals.longUrl %>" target="_blank">
