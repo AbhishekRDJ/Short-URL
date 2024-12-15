@@ -3,34 +3,34 @@ const URL = require('../Models/URL.js');
 
 async function handelGenerteNewShortURL(req, res) {
     try {
-        const shortID = shortid.generate(); // Generate short ID
+        const shortID = shortid.generate(); 
         const body = req.body;
 
-        // Validate request body
+        
         if (!body.url) {
             return res.status(400).json({ error: 'URL is required' });
         }
 
-        // Optional: Validate the URL format
+        
         const urlPattern = /^(http|https):\/\/[a-zA-Z0-9-_.]+(\.[a-zA-Z]{2,})+/;
         if (!urlPattern.test(body.url)) {
             return res.status(400).json({ error: 'Invalid URL format' });
         }
 
-        // Check if the shortId already exists in the database
+        
         const existingUrl = await URL.findOne({ shortId: shortID });
         if (existingUrl) {
             return res.status(400).json({ error: 'Short URL already exists' });
         }
 
-        // Create a new URL entry in the database
+        
         const newUrl = await URL.create({
             shortId: shortID,
             redirectURL: body.url,
             visitedHistory: []
         });
         await newUrl.save();
-        // Respond with the created short URL
+        
         return res.render("home", {
             id: shortID,
             redirectURL: req.body.url,
@@ -51,13 +51,12 @@ async function handleGetAnalytics(req, res) {
         return res.status(404).send("Short URL not found.");
     }
 
-    // Get the total click count (or visits history length)
+   
     const totalclick = result.visitedHistory.length-1;
 
-    // Render the home page and pass totalclick to EJS
     return res.render("home", {
         totalclick: totalclick,
-        id: shortId // You may want to send the id too
+        id: shortId 
     });
 
     // return res.json({

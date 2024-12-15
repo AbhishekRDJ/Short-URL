@@ -18,7 +18,7 @@ const mongoURI = "mongodb+srv://abhisheksangule6:3v35GLNLtpovw4DV@urlshortener.5
 
 if (!mongoURI) {
     console.error("MONGO_URI is not defined. Please check your .env file.");
-    process.exit(1); // Exit the app if MONGO_URI is missing
+    process.exit(1); 
   }
 connectToMongo(mongoURI).then(() => {
     console.log("MongoDB Has been Connected")
@@ -52,7 +52,7 @@ app.get("/url/:shortId", async (req, res) => {
             return res.status(404).json({ error: "Short URL not found" });
         }
 
-        // Redirect to the original URL
+        
         res.redirect(entry.redirectURL);
     } catch (error) {
         console.error("Error fetching short URL:", error);
