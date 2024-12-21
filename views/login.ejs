@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,25 +16,32 @@
             align-items: center;
             height: 100vh;
         }
+
         .login-form {
             background: #fff;
             padding: 20px;
             border-radius: 5px;
+            display: flex;
+            flex-direction: column;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             width: 300px;
         }
+
         .login-form h2 {
             text-align: center;
             margin-bottom: 20px;
         }
+
         .form-group {
             margin-bottom: 15px;
         }
+
         .form-group label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
         }
+
         .form-group input {
             width: 100%;
             padding: 8px;
@@ -41,6 +49,7 @@
             border: 1px solid #ccc;
             border-radius: 3px;
         }
+
         .login-btn {
             width: 100%;
             padding: 10px;
@@ -51,14 +60,20 @@
             font-size: 16px;
             cursor: pointer;
         }
+
         .login-btn:hover {
             background-color: #0056b3;
         }
+
         .signup-btn {
             margin-top: 20px;
+            margin-left: 60px;
+            margin-right: 60px;
             background-color: #28a745;
             color: #fff;
             border: none;
+            display: flex;
+            justify-content: center;
             padding: 10px 15px;
             border-radius: 4px;
             font-size: 16px;
@@ -76,24 +91,28 @@
         }
     </style>
 </head>
+
 <body>
     <div class="login-form">
         <h2>Login</h2>
         <form action="/user/login" method="POST">
-            <% if (typeof error !== 'undefined') { %>
-                <p style="color: red; text-align: center;"><%= error %></p>
-            <% } %>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            </div>
-            <button type="submit" class="login-btn">Login</button>
+            <% if (typeof error !=='undefined' ) { %>
+                <p style="color: red; text-align: center;">
+                    <%= error %>
+                </p>
+                <% } %>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="login-btn">Login</button>
         </form>
         <button class="signup-btn" onclick="window.location.href='/signup'">Sign Up</button>
     </div>
 </body>
+
 </html>
