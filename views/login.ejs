@@ -54,6 +54,26 @@
         .login-btn:hover {
             background-color: #0056b3;
         }
+        .signup-btn {
+            margin-top: 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .signup-btn:hover {
+            background-color: #218838;
+        }
+
+        p.error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -73,6 +93,7 @@
             </div>
             <button type="submit" class="login-btn">Login</button>
         </form>
+        <button class="signup-btn" onclick="window.location.href='/signup'">Sign Up</button>
     </div>
 </body>
 </html>
