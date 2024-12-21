@@ -148,7 +148,47 @@
             font-size: 0.9rem;
             color: #777;
         }
+        .top-right-buttons {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
 
+        .top-right-buttons button {
+            margin-left: 10px;
+            padding: 10px 15px;
+            font-size: 14px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .top-right-buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .generated-url input {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .action-buttons button {
+            margin: 5px;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #555;
+            margin-top: 20px;
+        }
         @media screen and (max-width: 600px) {
             .input-group input {
                 width: 60%;
@@ -158,6 +198,10 @@
 </head>
 
 <body>
+    <div class="top-right-buttons">
+        <button onclick="window.location.href='/login'">Sign In</button>
+        <button onclick="window.location.href='/signup'">Sign Up</button>
+    </div>
     <div class="container">
         <h1>URL Shortener</h1>
         <% if (locals.id && locals.totalclick>= 0) { %>
